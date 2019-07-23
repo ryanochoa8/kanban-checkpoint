@@ -109,7 +109,7 @@ export default new Vuex.Store({
     async getListsByBoardId({ commit, dispatch }, payload) {
       // debugger
       try {
-        let res = await api.get('lists/', payload)
+        let res = await api.get('boards/' + payload + '/lists')
         commit('setActiveLists', res.data)
         console.log(this.state)
       } catch (error) { console.error(error) }
@@ -119,10 +119,18 @@ export default new Vuex.Store({
     // this is only drawing the lists on screen after we've added a list
     async createList({ commit, dispatch }, payload) {
       try {
-        let res = await api.post('lists/', payload)
-        dispatch('getListsByBoardId')
+        let res = await api.post('/lists', payload)
+        dispatch('getListsByBoardId', res.data.boardId)
+        // commit('setActiveLists', res.data)
       } catch (error) { console.error(error) }
-    }
+    },
+    // async deleteListById({ commit, dispatch }, payload) {
+    //   try {
+
+    //   } catch (error) {
+
+    //   }
+    // },
 
 
 

@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h6 v-for="list in lists">{{list.title}}</h6>
+    <div v-for="list in lists">
+      <h6>{{list.title}}</h6>
+      <button class="btn btn-danger" @click="deleteList(list)">Delete</button>
+    </div>
   </div>
 </template>
 
@@ -11,6 +14,11 @@
     computed: {
       lists() {
         return this.$store.state.activeLists
+      }
+    },
+    methods: {
+      deleteList() {
+        this.$store.dispatch('deleteListById', this.list._id)
       }
     }
   }

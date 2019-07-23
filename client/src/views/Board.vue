@@ -3,8 +3,12 @@
     <h3>{{board.title}}</h3>
     <h5>{{board.description}}</h5>
     <form @submit.prevent="createList(newList)">
-      <label for="list">Lists</label>
-      <input type="text" name="list" v-model="newList.title">
+      <label for="title">Lists</label>
+      <input type="text" name="title" v-model="newList.title">
+      <!-- <label for="boardId">BoardId</label>
+      <input type="text" name="boardId" v-model="newList.title">
+      <label for="list">title</label>
+      <input type="text" name="list" v-model="newList.title"> -->
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <lists></lists>
@@ -26,7 +30,7 @@
     },
     mounted() {
       this.$store.dispatch("getActiveBoard", this.$route.params.boardId)
-      this.$store.dispatch("getListsByBoardId", this.$store.state.activeLists.boardId)
+      this.$store.dispatch("getListsByBoardId", this.$route.params.boardId)
 
     },
     computed: {
