@@ -70,17 +70,18 @@ export default new Vuex.Store({
 
 
     //#region -- BOARDS --
-    getBoards({ commit, dispatch }) {
-      api.get('boards')
-        .then(res => {
-          commit('setBoards', res.data)
-        })
+    async getBoards({ commit, dispatch }) {
+      try {
+        let res = await api.get('boards')
+        commit('setBoards', res.data)
+      } catch (error) { console.error(error) }
     },
-    getActiveBoard({ commit, dispatch }, payload) {
-      api.get('boards/' + payload)
-        .then(res => {
-          commit('setActiveBoard', res.data)
-        })
+    async getActiveBoard({ commit, dispatch }, payload) {
+      try {
+
+        let res = await api.get('boards/' + payload)
+        commit('setActiveBoard', res.data)
+      } catch (error) { console.error(error) }
     },
     addBoard({ commit, dispatch }, boardData) {
       api.post('boards', boardData)
@@ -92,16 +93,20 @@ export default new Vuex.Store({
 
 
     //#region -- LISTS --
-    getLists({ commit, dispatch }) {
-      api.get('lists')
-        .then(res => {
-          commit('setLists', res.data)
-        })
+    async getListsByBoardId({ commit, dispatch }) {
+      try {
+        let res = await api.get('lists')
+        commit('setLists', res.data)
+        console.log(this.state)
+      } catch (error) { console.error(error) }
+
     },
-    createList({ commit, dispatch }, payload) {
-      let res = api.post('lists/' + payload.boardId)
-      commit('setLists', payload)
-      // dispatch('getLists')
+    // this is only drawing the lists on screen after we've added a list
+    async createList({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post('lists/', payload)
+        dispatch('getListsByBoardId')
+      } catch (error) { console.error(error) }
     }
 
 

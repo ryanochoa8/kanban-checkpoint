@@ -7,7 +7,7 @@
       <input type="text" name="list" v-model="newList.title">
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <lists v-for="list in lists"></lists>
+    <lists></lists>
   </div>
 </template>
 
@@ -26,6 +26,8 @@
     },
     mounted() {
       this.$store.dispatch("getActiveBoard", this.$route.params.boardId)
+      this.$store.dispatch("getLists", this.$route.params.boardId)
+
     },
     computed: {
       board() {

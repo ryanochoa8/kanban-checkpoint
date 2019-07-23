@@ -1,9 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+//@ts-ignore
 import Boards from './views/Boards.vue'
+//@ts-ignore
 import Board from './views/Board.vue'
+//@ts-ignore
 import Login from './views/Login.vue'
-import List from './components/List.vue'
+//@ts-ignore
+import Lists from './components/List.vue'
 
 Vue.use(Router)
 
@@ -18,12 +22,12 @@ export default new Router({
       path: '/boards/:boardId',
       name: 'board',
       props: true,
-      component: Board
-    },
-    {
-      path: '/lists/:boardId',
-      name: 'list',
-      component: List
+      component: Board,
+      children: [{
+        path: 'lists',
+        name: 'lists',
+        component: Lists
+      }]
     },
     {
       path: '/login',
