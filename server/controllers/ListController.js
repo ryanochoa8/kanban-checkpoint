@@ -11,6 +11,7 @@ export default class ListsController {
     this.router = express.Router()
       .use(Authorize.authenticated)
       .get('', this.getAll)
+      .get('/:id')
       .get('/:id', this.getById)
       .post('', this.create)
       // .put('/:id', this.edit)
@@ -25,6 +26,14 @@ export default class ListsController {
     try {
       //only gets boards by user who is logged in
       let data = await _listService.find({ authorId: req.session.uid })
+      return res.send(data)
+    }
+    catch (err) { next(err) }
+  }
+  async getByBoardId(req, res, next) {
+    try {
+      //only gets boards by user who is logged in
+      let data = await _listService.find({ boardId: req.params.boardId })
       return res.send(data)
     }
     catch (err) { next(err) }

@@ -10,7 +10,7 @@
     name: 'List',
     computed: {
       lists() {
-        return this.$store.state.lists
+        return this.$store.state.activeLists
       }
     }
   }

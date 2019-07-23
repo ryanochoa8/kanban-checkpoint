@@ -26,7 +26,7 @@
     },
     mounted() {
       this.$store.dispatch("getActiveBoard", this.$route.params.boardId)
-      this.$store.dispatch("getLists", this.$route.params.boardId)
+      this.$store.dispatch("getListsByBoardId", this.$store.state.activeLists.boardId)
 
     },
     computed: {
@@ -42,7 +42,7 @@
       },
       lists() {
         return (
-          this.$store.state.lists
+          this.$store.state.activeLists
         )
       }
     },

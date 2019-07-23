@@ -15,12 +15,14 @@ let api = Axios.create({
   withCredentials: true
 })
 
+
 export default new Vuex.Store({
   state: {
     user: {},
     boards: [],
     activeBoard: {},
-    lists: []
+    // lists: [],
+    activeLists: []
   },
   mutations: {
     setUser(state, user) {
@@ -32,8 +34,11 @@ export default new Vuex.Store({
     setActiveBoard(state, activeBoard) {
       state.activeBoard = activeBoard
     },
-    setLists(state, lists) {
-      state.lists = lists
+    // setLists(state, lists) {
+    //   state.lists = lists
+    // },
+    setActiveLists(state, activeLists) {
+      state.activeLists = activeLists
     }
   },
   actions: {
@@ -78,7 +83,6 @@ export default new Vuex.Store({
     },
     async getActiveBoard({ commit, dispatch }, payload) {
       try {
-
         let res = await api.get('boards/' + payload)
         commit('setActiveBoard', res.data)
       } catch (error) { console.error(error) }
@@ -93,14 +97,25 @@ export default new Vuex.Store({
 
 
     //#region -- LISTS --
-    async getListsByBoardId({ commit, dispatch }) {
+    // async getLists({ commit, dispatch }, payload) {
+    //   try {
+    //     let res = await api.get('lists/', payload)
+    //     commit('setLists', res.data)
+    //     console.log(this.state)
+    //   } catch (error) { console.error(error) }
+
+    // },
+
+    async getListsByBoardId({ commit, dispatch }, payload) {
+      // debugger
       try {
-        let res = await api.get('lists')
-        commit('setLists', res.data)
+        let res = await api.get('lists/', payload)
+        commit('setActiveLists', res.data)
         console.log(this.state)
       } catch (error) { console.error(error) }
 
     },
+
     // this is only drawing the lists on screen after we've added a list
     async createList({ commit, dispatch }, payload) {
       try {

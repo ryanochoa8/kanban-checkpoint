@@ -24,7 +24,7 @@ export default new Router({
       props: true,
       component: Board,
       children: [{
-        path: 'lists',
+        path: '/lists',
         name: 'lists',
         component: Lists
       }]
