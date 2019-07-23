@@ -5,18 +5,14 @@
     <form @submit.prevent="createList(newList)">
       <label for="title">Lists</label>
       <input type="text" name="title" v-model="newList.title">
-      <!-- <label for="boardId">BoardId</label>
-      <input type="text" name="boardId" v-model="newList.title">
-      <label for="list">title</label>
-      <input type="text" name="list" v-model="newList.title"> -->
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <lists></lists>
+    <list v-for="list in lists" :listProp="list"></list>
   </div>
 </template>
 
 <script>
-  import lists from '@/components/List.vue'
+  import list from '@/components/List.vue'
 
   export default {
     name: "board",
@@ -56,7 +52,7 @@
       }
     },
     components: {
-      lists
+      list
     },
     props: ["boardId"]
   };

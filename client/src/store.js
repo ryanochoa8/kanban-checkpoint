@@ -107,7 +107,6 @@ export default new Vuex.Store({
     // },
 
     async getListsByBoardId({ commit, dispatch }, payload) {
-      // debugger
       try {
         let res = await api.get('boards/' + payload + '/lists')
         commit('setActiveLists', res.data)
@@ -124,13 +123,18 @@ export default new Vuex.Store({
         // commit('setActiveLists', res.data)
       } catch (error) { console.error(error) }
     },
-    // async deleteListById({ commit, dispatch }, payload) {
-    //   try {
 
-    //   } catch (error) {
+    async deleteListById({ commit, dispatch }, payload) {
+      try {
+        let res = await api.delete('lists/' + payload._id)
+        dispatch('getListsByBoardId', payload.boardId)
 
-    //   }
-    // },
+        // commit('setActiveLists')
+        console.log(res)
+      } catch (error) {
+        console.error(error)
+      }
+    },
 
 
 

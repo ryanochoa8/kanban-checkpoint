@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-for="list in lists">
-      <h6>{{list.title}}</h6>
-      <button class="btn btn-danger" @click="deleteList(list)">Delete</button>
+    <div>
+      <h6>{{listProp.title}}</h6>
+      <button class="btn btn-danger" @click.prevent="deleteList">Delete</button>
     </div>
   </div>
 </template>
@@ -11,6 +11,7 @@
 
   export default {
     name: 'List',
+    props: ['listProp'],
     computed: {
       lists() {
         return this.$store.state.activeLists
@@ -18,7 +19,8 @@
     },
     methods: {
       deleteList() {
-        this.$store.dispatch('deleteListById', this.list._id)
+        // debugger
+        this.$store.dispatch('deleteListById', this.listProp)
       }
     }
   }
