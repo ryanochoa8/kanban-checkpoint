@@ -23,7 +23,9 @@ export default new Vuex.Store({
     activeBoard: {},
     // lists: [],
     activeLists: [],
-    tasks: []
+    tasks: {
+      /**'listId332': [] */
+    }
   },
   mutations: {
     setUser(state, user) {
@@ -42,7 +44,8 @@ export default new Vuex.Store({
       state.activeLists = activeLists
     },
     setTasks(state, tasks) {
-      state.tasks = tasks
+      if (!tasks.length) return
+      Vue.set(state.tasks, tasks[0].listId, tasks)
     }
   },
   actions: {
@@ -122,7 +125,6 @@ export default new Vuex.Store({
       try {
         let res = await api.get('boards/' + payload + '/lists')
         commit('setActiveLists', res.data)
-        console.log(this.state)
       } catch (error) { console.error(error) }
 
     },
@@ -156,7 +158,8 @@ export default new Vuex.Store({
     // #region --TASKS--
     async getTasksByListId({ commit, dispatch }, payload) {
       try {
-        let res = await api.get('boards/lists/' + payload + '/tasks')
+        console.log(payload)
+        let res = await api.get('/lists/' + payload + '/tasks')
         commit('setTasks', res.data)
         console.log(this.state)
       } catch (error) { console.error(error) }

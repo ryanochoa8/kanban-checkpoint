@@ -1,7 +1,7 @@
 <template>
   <div class="task">
     <div>
-      <h6>{{taskProp.title}}</h6>
+      <p>{{taskProp.title}}</p>
       <button class="btn btn-danger" @click.prevent="deleteList">Delete</button>
     </div>
   </div>

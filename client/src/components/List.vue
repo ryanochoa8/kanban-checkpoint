@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h6>{{listProp.title}}</h6>
+      <h3>{{listProp.title}}</h3>
       <button class="btn btn-danger" @click.prevent="deleteList">Delete</button>
     </div>
     <form>
@@ -28,9 +28,17 @@
         }
       }
     },
+    mounted() {
+      // this.$store.dispatch('getTasksByListId', this.$route.params.listId)
+      this.$store.dispatch('getTasksByListId', this.listProp._id)
+
+    },
     computed: {
       lists() {
         return this.$store.state.activeLists
+      },
+      tasks() {
+        return this.$store.state.tasks[this.listProp._id] || []
       }
     },
     methods: {

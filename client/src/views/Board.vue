@@ -27,7 +27,6 @@
     mounted() {
       this.$store.dispatch("getActiveBoard", this.$route.params.boardId)
       this.$store.dispatch("getListsByBoardId", this.$route.params.boardId)
-      this.$store.dispatch('getTasksByListId', this.$route.params.listId)
 
     },
     computed: {
@@ -45,7 +44,7 @@
         return (
           this.$store.state.activeLists
         )
-      }
+      },
     },
     methods: {
       createList() {
