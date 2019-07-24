@@ -8,6 +8,8 @@ import Board from './views/Board.vue'
 import Login from './views/Login.vue'
 //@ts-ignore
 import Lists from './components/List.vue'
+// @ts-ignore
+import Tasks from './components/Task.vue'
 
 Vue.use(Router)
 
@@ -26,7 +28,12 @@ export default new Router({
       children: [{
         path: '/lists',
         name: 'lists',
-        component: Lists
+        component: Lists,
+        children: [{
+          path: '/tasks',
+          name: 'tasks',
+          component: Tasks
+        }]
       }]
     },
     {
