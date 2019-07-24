@@ -4,13 +4,14 @@
 
       <div>
         <h3>{{listProp.title}}</h3>
-        <button class="btn btn-danger" @click.prevent="deleteList">Delete</button>
       </div>
-      <form>
+      <form @submit.prevent="createTask(newTask)">
         <label for="task">Task</label>
         <input type="text" name='task' v-model='newTask.title'>
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
       </form>
       <task v-for="task in tasks" :taskProp="task"></task>
+      <button class="btn btn-danger row my-2" @click.prevent="deleteList">Delete List</button>
 
     </div>
   </div>
@@ -26,8 +27,8 @@
       return {
         newTask: {
           title: '',
-          boardId: this.boardId,
-          listId: this.listId
+          boardId: this.listProp.boardId,
+          listId: this.listProp._id
         }
       }
     },

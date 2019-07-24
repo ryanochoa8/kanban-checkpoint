@@ -2,7 +2,7 @@
   <div class="task">
     <div>
       <p>{{taskProp.title}}</p>
-      <button class="btn btn-danger" @click.prevent="deleteList">Delete</button>
+      <button class="btn btn-outline-danger" @click.prevent="deleteTask">Delete Task</button>
     </div>
   </div>
 </template>
@@ -20,7 +20,12 @@
         return this.$store.state.tasks
       }
     },
-    methods: {},
+    methods: {
+      deleteTask() {
+        // debugger
+        this.$store.dispatch('deleteTaskById', this.taskProp)
+      }
+    },
     components: {}
   }
 </script>

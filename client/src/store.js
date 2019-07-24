@@ -158,12 +158,26 @@ export default new Vuex.Store({
     // #region --TASKS--
     async getTasksByListId({ commit, dispatch }, payload) {
       try {
-        console.log(payload)
         let res = await api.get('/lists/' + payload + '/tasks')
         commit('setTasks', res.data)
-        console.log(this.state)
       } catch (error) { console.error(error) }
 
+    },
+    async createTask({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post('/tasks', payload)
+        dispatch('getTasksByListId', res.data.listId)
+        console.log('Created a task.')
+      } catch (error) { console.error(error) }
+    },
+    async deleteTaskById({ commit, dispatch }, payload) {
+      try {
+        let res = await api.delete('tasks/' + payload._id)
+        dispatch('getTasksByListId', payload.listId)
+        console.log('Task was deleted.')
+      } catch (error) {
+        console.error(error)
+      }
     },
 
     // #endregion
