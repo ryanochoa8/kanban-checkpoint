@@ -1,15 +1,18 @@
 <template>
   <div>
-    <div>
-      <h3>{{listProp.title}}</h3>
-      <button class="btn btn-danger" @click.prevent="deleteList">Delete</button>
-    </div>
-    <form>
-      <label for="task">Task</label>
-      <input type="text" name='task' v-model='newTask.title'>
-    </form>
-    <task v-for="task in tasks" :taskProp="task"></task>
+    <div class="border border-dark rounded my-4">
 
+      <div>
+        <h3>{{listProp.title}}</h3>
+        <button class="btn btn-danger" @click.prevent="deleteList">Delete</button>
+      </div>
+      <form>
+        <label for="task">Task</label>
+        <input type="text" name='task' v-model='newTask.title'>
+      </form>
+      <task v-for="task in tasks" :taskProp="task"></task>
+
+    </div>
   </div>
 </template>
 
@@ -57,4 +60,5 @@
 </script>
 
 <style scoped>
+
 </style>
