@@ -1,8 +1,11 @@
 <template>
   <div class="task">
-    <div>
-      <p>{{taskProp.title}}</p>
-      <button class="btn btn-outline-danger" @click.prevent="deleteTask">Delete Task</button>
+    <div class="row my-4">
+      <p class="col-6 offset-1 justify-content-end d-flex">{{taskProp.title}}</p>
+      <div class="col-5">
+        <button class="btn btn-sm btn-danger justify-content-start d-flex" @click.prevent="deleteTask">Delete
+          Task</button>
+      </div>
     </div>
   </div>
 </template>
