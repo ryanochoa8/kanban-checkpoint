@@ -195,8 +195,6 @@ export default new Vuex.Store({
       }
     }
 
-    // 5d39e1736e19545b82e34e94
-    // 5d39fc2ac4aac15ca6382f25
 
     // #endregion
   }
