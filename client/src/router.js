@@ -10,6 +10,8 @@ import Login from './views/Login.vue'
 import Lists from './components/List.vue'
 // @ts-ignore
 import Tasks from './components/Task.vue'
+// @ts-ignore
+import Comments from './components/Comments.vue'
 
 Vue.use(Router)
 
@@ -34,7 +36,12 @@ export default new Router({
         children: [{
           path: '/tasks/',
           name: 'tasks',
-          component: Tasks
+          component: Tasks,
+          children: [{
+            path: '/comments/',
+            name: 'comments',
+            component: Comments,
+          }]
         }]
       }]
     },

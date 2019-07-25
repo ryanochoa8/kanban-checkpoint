@@ -23,9 +23,8 @@ export default new Vuex.Store({
     activeBoard: {},
     // lists: [],
     activeLists: [],
-    tasks: {
-      /**'listId332': [] */
-    }
+    tasks: {},
+    comments: {}
   },
   mutations: {
     setUser(state, user) {
@@ -49,6 +48,9 @@ export default new Vuex.Store({
     },
     setTasks(state, { listId, tasks }) {
       Vue.set(state.tasks, listId, tasks)
+    },
+    setComments(state, comments) {
+      Vue.set(state.comments, comments[0].taskId, comments)
     }
   },
   actions: {
@@ -193,10 +195,36 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error)
       }
-    }
+    },
 
 
     // #endregion
+    //#region --COMENTS--
+    async getCommentsByTaskId({ commit, dispatch }, taskId) {
+      try {
+        let res = await api.get('/tasks/' + taskId + '/comments')
+        commit('setComments', { tasks: res.data, taskId })
+      } catch (error) { console.error(error) }
+
+    },
+    async createComment({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post('/comments', payload)
+        dispatch('getCommentsByTaskId', res.data.taskId)
+        console.log('Created a comment.')
+      } catch (error) { console.error(error) }
+    },
+    async deleteCommentById({ commit, dispatch }, payload) {
+      try {
+        let res = await api.delete('comments/' + payload._id)
+        dispatch('getCommentsByTaskId', payload.taskId)
+        console.log('Comment was deleted.')
+      } catch (error) {
+        console.error(error)
+      }
+    },
+
+    //#endregion
   }
 
 })
