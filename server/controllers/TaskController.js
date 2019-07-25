@@ -10,7 +10,7 @@ export default class TaskController {
       .use(Authorize.authenticated)
       .get('', this.getAll)
       .post('', this.addTask)
-      // .put(':/id/listId', this.changeLists)
+      .put('/:id', this.changeLists)
       .delete('/:id', this.deleteTask)
   }
   async getAll(req, res, next) {
@@ -37,16 +37,19 @@ export default class TaskController {
     }
   }
   // TODO fix this 
-  // async changeLists(req, res, next) {
-  //   try {
-  //     await _taskService.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true })
-  //     return res.send("Successfully updated")
-  //   } catch (error) {
-  //     next(error)
-  //   }
-  // }
+  async changeLists(req, res, next) {
+    try {
+      await _taskService.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      return res.send("Successfully updated")
+    } catch (error) {
+      next(error)
+    }
+  }
 
 }
+
+// original listId 5d37339e6ccf8725e16f0601
+// 
 
 
 

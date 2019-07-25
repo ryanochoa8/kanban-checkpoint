@@ -30,7 +30,7 @@ export default new Router({
         name: 'lists',
         component: Lists,
         children: [{
-          path: '/tasks',
+          path: '/tasks/',
           name: 'tasks',
           component: Tasks
         }]

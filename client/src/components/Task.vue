@@ -10,6 +10,9 @@
   </div>
 </template>
 
+<!-- To change the task from one list to another we need the listTitle -->
+
+
 
 <script>
   export default {
