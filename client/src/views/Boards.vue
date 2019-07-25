@@ -1,7 +1,7 @@
 <template>
   <div class="boards">
     <div class="container-fluid">
-
+      <a @click="logout" href="#">Logout</a>
       <h3>WELCOME TO THE BOARDS!!!</h3>
       <form @submit.prevent="addBoard">
         <input type="text" placeholder="title" v-model="newBoard.title" required>
@@ -49,6 +49,10 @@
       deleteBoard(boardId) {
         this.$store.dispatch("deleteBoard", boardId);
         console.log("Board was deleted.")
+      },
+      logout() {
+        this.$store.dispatch("logout")
+        console.log("The user was logged out")
       }
     }
   };
