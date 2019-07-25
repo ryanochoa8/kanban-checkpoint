@@ -13,6 +13,8 @@ import Tasks from './components/Task.vue'
 
 Vue.use(Router)
 
+
+
 export default new Router({
   routes: [
     {

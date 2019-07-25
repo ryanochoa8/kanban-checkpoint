@@ -47,9 +47,8 @@ export default new Vuex.Store({
     setActiveLists(state, activeLists) {
       state.activeLists = activeLists
     },
-    setTasks(state, tasks) {
-      if (!tasks.length) return
-      Vue.set(state.tasks, tasks[0].listId, tasks)
+    setTasks(state, { listId, tasks }) {
+      Vue.set(state.tasks, listId, tasks)
     }
   },
   actions: {
@@ -156,14 +155,15 @@ export default new Vuex.Store({
 
 
 
+
     //#endregion
 
 
     // #region --TASKS--
-    async getTasksByListId({ commit, dispatch }, payload) {
+    async getTasksByListId({ commit, dispatch }, listId) {
       try {
-        let res = await api.get('/lists/' + payload + '/tasks')
-        commit('setTasks', res.data)
+        let res = await api.get('/lists/' + listId + '/tasks')
+        commit('setTasks', { tasks: res.data, listId })
       } catch (error) { console.error(error) }
 
     },
@@ -183,6 +183,20 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+
+    async moveTask({ commit, dispatch }, { taskProp, oldListId }) {
+      try {
+        let res = await api.put('tasks/' + taskProp._id, taskProp)
+        dispatch('getTasksByListId', taskProp.listId)
+        dispatch('getTasksByListId', oldListId)
+
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    // 5d39e1736e19545b82e34e94
+    // 5d39fc2ac4aac15ca6382f25
 
     // #endregion
   }

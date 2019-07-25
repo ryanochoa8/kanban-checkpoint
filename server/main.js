@@ -2,6 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import bp from 'body-parser'
 import DbContext from "./db/dbconfig"
+
+
 const server = express()
 
 //Fire up database connection
@@ -27,6 +29,7 @@ server.use(bp.json())
 server.use(bp.urlencoded({
   extended: true
 }))
+
 
 //REGISTER YOUR SESSION, OTHERWISE YOU WILL NEVER GET LOGGED IN
 import AuthController from './controllers/AuthController'
