@@ -2,7 +2,7 @@
   <div>
     <div class="comments row m-2">
       <p class="col-6">{{commentProp.title}}</p>
-      <button class="btn btn-danger offset-1" @click.prevent="deleteComment">Delete
+      <button class="btn btn-outline-primary offset-1" @click.prevent="deleteComment">Delete
         Comment</button>
     </div>
   </div>
@@ -33,5 +33,11 @@
 
 
 <style scoped>
+  .row {
+    color: navy;
+  }
 
+  .btn:hover {
+    background-color: green;
+  }
 </style>
