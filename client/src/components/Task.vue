@@ -5,7 +5,7 @@
       <div class="task">
         <div class="row my-4">
           <p class="col-6 offset-1 justify-content-end d-flex">{{taskProp.title}}</p>
-          <p class="col-6 offset-1 justify-content-end d-flex">{{taskProp.listId}}</p>
+          <!-- <p class="col-6 offset-1 justify-content-end d-flex">{{taskProp.listId}}</p> -->
           <div class="col-5">
             <button class="btn btn-sm btn-danger justify-content-start d-flex" @click.prevent="deleteTask">Delete
               Task</button>

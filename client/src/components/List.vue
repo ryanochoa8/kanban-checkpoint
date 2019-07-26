@@ -4,7 +4,7 @@
     <div class="border border-dark rounded m-4 " id="listShadow">
       <div>
         <h3>{{listProp.title}}</h3>
-        <p>{{listProp._id}}</p>
+        <!-- <p>{{listProp._id}}</p> -->
       </div>
       <form @submit.prevent="createTask(newTask)">
         <label for="task">Task</label>
