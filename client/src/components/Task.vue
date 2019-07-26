@@ -4,21 +4,24 @@
       <drag class="drag" :transfer-data="{taskProp, oldListId: taskProp.listId}">
         <div class="task">
           <div class="row my-4">
-            <p class="col-6 offset-1 justify-content-end d-flex">{{taskProp.title}}</p>
+            <h5 class="col-6 offset-1 justify-content-start d-flex border-bottom">{{taskProp.title}}</h5>
             <!-- <p class="col-6 offset-1 justify-content-end d-flex">{{taskProp.listId}}</p> -->
-            <div class="col-5">
+            <div class="col-2">
               <button class="btn btn-sm btn-danger justify-content-start d-flex" @click.prevent="deleteTask">Delete
                 Task</button>
             </div>
+            <a class="col-3" @click="showCommentForm=!showCommentForm">
+              <p id="textDecoration" class="border-bottom">Make/Open Comments</p>
+            </a>
           </div>
-          <label for="comment">Comment</label>
-          <input type="text" name="comment" v-model="newComment.title" placeholder="Enter a comment">
-          <button class="btn btn-sm btn-warning" @click.prevent="createComment">Submit</button>
-
+          <form @submit.prevent="createComment(newComment)" v-if="showCommentForm">
+            <p><b>Comments</b></p>
+            <input type="text" name="comment" v-model="newComment.title" placeholder="Enter a comment">
+            <button class="btn btn-sm btn-warning" @click.prevent="createComment">Submit</button>
+            <comment v-for="comment in comments" :commentProp="comment"></comment>
+          </form>
         </div>
       </drag>
-      <p><b>Comments</b></p>
-      <comment v-for="comment in comments" :commentProp="comment"></comment>
     </div>
   </div>
 </template>
@@ -40,7 +43,8 @@
           title: '',
           listId: this.taskProp.listId,
           taskId: ''
-        }
+        },
+        showCommentForm: false
       }
     },
     mounted() {
@@ -75,6 +79,8 @@
 
 
 
-<style scoped>
-
+<style>
+  #textDecoration:hover {
+    color: rgb(0, 145, 255);
+  }
 </style>

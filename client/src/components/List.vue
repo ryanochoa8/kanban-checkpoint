@@ -12,7 +12,8 @@
           <input type="text" placeholder="Enter a new task" name='task' v-model='newTask.title'>
           <button type="submit" class="btn btn-outline-primary">Submit Task</button>
         </form>
-        <drop class="drop" @drop="moveTask"> <b>Drop Moved Task Here</b>
+        <drop class="drop m-2" @drop="moveTask"> <b class="border border-dark rounded p-1 bg-light">Drop Moved Task
+            Here</b>
           <task v-for="task in tasks" :taskProp="task">
 
           </task>
