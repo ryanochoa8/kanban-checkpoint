@@ -49,8 +49,8 @@ export default new Vuex.Store({
     setTasks(state, { listId, tasks }) {
       Vue.set(state.tasks, listId, tasks)
     },
-    setComments(state, comments) {
-      Vue.set(state.comments, comments[0].taskId, comments)
+    setComments(state, data) {
+      Vue.set(state.comments, data.taskId, data.comments)
     }
   },
   actions: {
@@ -200,14 +200,15 @@ export default new Vuex.Store({
 
     // #endregion
     //#region --COMENTS--
-    async getCommentsByTaskId({ commit, dispatch }, taskId) {
+    async getCommentsByTaskId({ commit, dispatch }, payload) {
       try {
-        let res = await api.get('/tasks/' + taskId + '/comments')
-        commit('setComments', { tasks: res.data, taskId })
+        let res = await api.get('tasks/' + payload + '/comments')
+        commit('setComments', { comments: res.data, taskId: payload })
       } catch (error) { console.error(error) }
 
     },
     async createComment({ commit, dispatch }, payload) {
+      console.log(payload)
       try {
         let res = await api.post('/comments', payload)
         dispatch('getCommentsByTaskId', res.data.taskId)

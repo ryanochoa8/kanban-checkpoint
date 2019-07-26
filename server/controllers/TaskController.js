@@ -1,4 +1,6 @@
 import _taskService from '../services/TaskService.js'
+import _commentService from '../services/CommentService.js'
+
 import express from 'express'
 import { Authorize } from '../middleware/authorize.js'
 // add and remove (inside the list)
@@ -8,6 +10,7 @@ export default class TaskController {
   constructor() {
     this.router = express.Router()
       .use(Authorize.authenticated)
+      .get('/:taskId/comments', this.getCommentsByTaskId)
       .get('', this.getAll)
       .post('', this.addTask)
       .put('/:id', this.changeLists)
@@ -41,6 +44,14 @@ export default class TaskController {
     try {
       await _taskService.findByIdAndUpdate(req.params.id, req.body, { new: true })
       return res.send("Successfully updated")
+    } catch (error) {
+      next(error)
+    }
+  }
+  async getCommentsByTaskId(req, res, next) {
+    try {
+      let data = await _commentService.find({ taskId: req.params.taskId })
+      return res.send(data)
     } catch (error) {
       next(error)
     }

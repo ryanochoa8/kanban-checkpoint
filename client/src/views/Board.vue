@@ -12,7 +12,7 @@
         <input type="text" placeholder="Enter a new list" name="title" v-model="newList.title">
         <button type="submit" class="btn btn-primary">Submit List</button>
       </form>
-      <list v-for="list in lists" :listProp="list"></list>
+      <list v-for="list in lists" class="container-fluid" :listProp="list"></list>
     </div>
   </div>
 </template>

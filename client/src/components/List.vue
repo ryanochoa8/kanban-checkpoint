@@ -1,22 +1,24 @@
 <template>
   <div>
+    <div class="container-fluid">
 
-    <div class="border border-dark rounded m-4 " id="listShadow">
-      <div>
-        <h3>{{listProp.title}}</h3>
-        <!-- <p>{{listProp._id}}</p> -->
+      <div class="border border-dark rounded m-4" id="listShadow">
+        <div>
+          <h3>{{listProp.title}}</h3>
+          <!-- <p>{{listProp._id}}</p> -->
+        </div>
+        <form @submit.prevent="createTask(newTask)">
+          <label for="task">Task</label>
+          <input type="text" placeholder="Enter a new task" name='task' v-model='newTask.title'>
+          <button type="submit" class="btn btn-outline-primary">Submit Task</button>
+        </form>
+        <drop class="drop" @drop="moveTask"> <b>Drop Moved Task Here</b>
+          <task v-for="task in tasks" :taskProp="task">
+
+          </task>
+        </drop>
+        <button class="btn btn-block btn-outline-danger mt-2" @click.prevent="deleteList">Delete List</button>
       </div>
-      <form @submit.prevent="createTask(newTask)">
-        <label for="task">Task</label>
-        <input type="text" placeholder="Enter a new task" name='task' v-model='newTask.title'>
-        <button type="submit" class="btn btn-outline-primary">Submit Task</button>
-      </form>
-      <drop class="drop" @drop="moveTask"> <b>Drop Moved Task Here</b>
-        <task v-for="task in tasks" :taskProp="task">
-
-        </task>
-      </drop>
-      <button class="btn btn-block btn-outline-danger mt-2" @click.prevent="deleteList">Delete List</button>
     </div>
   </div>
 </template>

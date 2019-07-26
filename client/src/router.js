@@ -11,7 +11,7 @@ import Lists from './components/List.vue'
 // @ts-ignore
 import Tasks from './components/Task.vue'
 // @ts-ignore
-// import Comments from './components/Comments.vue'
+import Comments from './components/Comment.vue'
 
 Vue.use(Router)
 
@@ -37,11 +37,11 @@ export default new Router({
           path: '/tasks/',
           name: 'tasks',
           component: Tasks,
-          // children: [{
-          //   path: '/comments/',
-          //   name: 'comments',
-          //   component: Comments,
-          // }]
+          children: [{
+            path: '/comments/',
+            name: 'comments',
+            component: Comments,
+          }]
         }]
       }]
     },
